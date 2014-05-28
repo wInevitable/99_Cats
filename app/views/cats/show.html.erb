@@ -1,0 +1,10 @@
+<h1><%= @cat.name %></h1>
+
+<table border=1>
+  <tr><th>Birth Date</th><td><%= @cat.birth_date %></td></tr>
+  <tr><th>Age</th><td><%= @cat.age %></td></tr>
+  <tr><th>Color</th><td><%= @cat.color %></td></tr>
+  <tr><th>Sex</th><td><%= @cat.sex %></td></tr>
+</table>
+<br>
+<a href="<%= edit_cat_url(@cat.id) %>">Edit Cat</a>
