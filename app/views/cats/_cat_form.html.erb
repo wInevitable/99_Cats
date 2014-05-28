@@ -1,0 +1,40 @@
+<h1><%= verb %> Cat</h1>
+
+<% unless cat.errors.blank? %>
+<p><%= cat.errors.full_messages %></p>
+<% end %>
+
+<% if cat.persisted? %>
+  <form action="<%= cat_url(cat) %>" method="post">
+  <input type="hidden" name="_method" value="put">
+<% else %>
+  <form action="<%= cats_url(cat) %>" method="post">
+<% end %>
+  
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><br/>
+  
+  <label for="cat-name">Name</label>
+  <input type="text" value="<%= cat.name %>" name="cat[name]" id="cat-name"><br/>
+  
+  <label for="cat-age">Age</label>
+  <input type="text" value="<%= cat.age %>" name="cat[age]" id="cat-age"><br/>
+  
+  <label for="cat-name">Birth Date</label>
+  <input type="date" value="<%= cat.birth_date.try(:to_date).to_s %>" name="cat[birth_date]" id="cat-birth-date"><br/>
+  
+  <label for="cat-color">Color</label>
+  <select name="cat[color]">
+    <option value="" selected>
+    <% Cat::COLORS.each do |color| %>
+      <option value="<%= color %>" <%= "selected" if color == cat.color  %>>
+        <%= color %>
+      </option>
+    <% end %>
+  </select><br/>
+  
+  <input type="radio" name="cat[sex]" value="M" <%= "checked" if cat.sex == "M" %>>Male<br>
+  <input type="radio" name="cat[sex]" value="F" <%= "checked" if cat.sex == "F" %>>Female<br/><br/>
+  
+  <button><%= verb %> Cat</button>
+  
+</form>
