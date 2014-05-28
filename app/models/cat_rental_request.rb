@@ -20,7 +20,7 @@ class CatRentalRequest < ActiveRecord::Base
       end
       # Save approval
       self.status = "APPROVED"
-      self.save
+      self.save!
     end
   end
   

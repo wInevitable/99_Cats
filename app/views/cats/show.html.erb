@@ -20,7 +20,17 @@
       <td><%= request.end_date %></td>
       <td>
         <% if request.status == "PENDING" %>
-          <%= link_to "Approve", approve_request_url(request.id) %>
+          <form action="<%= approve_request_url(request.id) %>" method="POST">
+            <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <button>Approve</button>
+          </form>
+          
+          <form action="<%= deny_request_url(request.id) %>" method="POST">
+            <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <button>Deny</button>
+          </form>
         <% else %>
           <%= request.status %>
         <% end %>
