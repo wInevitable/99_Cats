@@ -8,18 +8,25 @@
 </table>
 <br>
 
-<table border=1>
-  <tr>
-    <th colspan=2>Requests<th>
-  </tr>
-  <tr>
-    <th>Start Date</th><th>End Date</th>
-  </tr>
-  <% @cat_rental_requests.each do |request| %>
-  <tr>
-    <td><%= request.start_date %></td>
-    <td><%= request.end_date %></td>
-  </tr>
+<table border=5>
+  <tr><th colspan='3'>Requests</th></tr>
+  <tr><th>Start Date</th><th>End Date</th><th>Status</th></tr>
+  <% if @cat_rental_requests.empty? %>
+    <tr><td colspan='3'>No rental requests.</td></tr>
+  <% else %>
+    <% @cat_rental_requests.each do |request| %>
+    <tr>
+      <td><%= request.start_date %></td>
+      <td><%= request.end_date %></td>
+      <td>
+        <% if request.status == "PENDING" %>
+          <%= link_to "Approve", approve_request_url(request.id) %>
+        <% else %>
+          <%= request.status %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
   <% end %>
 </table>
 
