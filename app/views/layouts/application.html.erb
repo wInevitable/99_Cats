@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>99 Cats - Buy, Sell, and Trade</title>
+  <title>99 Cats - Rent a Cat Today</title>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -9,9 +9,7 @@
 <nav>
   <a href="<%= cats_url %>">Home</a>
   <a href="<%= new_cat_url %>">Add Cat</a>
-  <a href="">Buy</a>
-  <a href="">Sell</a>
-  <a href="">Trade</a>
+  <a href="<%= new_cat_rental_request_url %>">Rent a Cat</a>
 </nav>
 
 <%= yield %>

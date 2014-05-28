@@ -13,5 +13,5 @@ class Cat < ActiveRecord::Base
   validates :color, inclusion: { in: %w(Black White Orange Yellow Gray Brown Blue),
           message: "%{value} is not a valid color" }
   
-  
+  has_many :cat_rental_requests, dependent: :destroy
 end
