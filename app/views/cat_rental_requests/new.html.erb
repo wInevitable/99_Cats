@@ -1,7 +1,7 @@
 <h1>New Rental Request</h1>
 
 <% unless @cat_rental_request.errors.blank? %>
-<p><%= @cat_rental_request.errors.full_messages %></p>
+<p style='color:red;text-shadow:3px 3px 3px pink'><b><i><%= @cat_rental_request.errors.full_messages[0].upcase %></i></b></p>
 <% end %>
 
 <form action="<%= cat_rental_requests_url %>" method="POST">

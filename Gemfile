@@ -27,6 +27,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+#gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt-ruby', require: 'bcrypt'
+
 group :doc do
   gem 'sdoc', require: false
 end

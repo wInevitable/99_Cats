@@ -4,12 +4,14 @@ class CatRentalRequest < ActiveRecord::Base
     self.status ||= "PENDING"
   end
   
-  validates :cat_id, :start_date, :end_date, :status, presence: true
+  validates :cat_id, :start_date, :end_date, :status, :user_id, presence: true
   validates :status, inclusion: { in: %w(PENDING APPROVED DENIED),
       message: "%{value} is not a valid status" }
   validate :request_has_no_conflict
+  validate :start_date_before_end_date
   
   belongs_to :cat
+  belongs_to :user
   
   def approve!
     CatRentalRequest.transaction do
@@ -45,6 +47,10 @@ class CatRentalRequest < ActiveRecord::Base
     if !overlapping_approved_requests.empty?
       errors[:base] << "Request conflicts with a prior rental."
     end
+  end
+  
+  def start_date_before_end_date
+    errors[:base] << "Impossible date range." if self.start_date > self.end_date
   end
   
 end

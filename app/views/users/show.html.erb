@@ -1,0 +1,79 @@
+<h1><%= @user.user_name %>'s Profile</h1>
+
+<hr>
+
+<table border=1>
+  <tr>
+    <th colspan='4'>My Cats</th>
+  </tr>
+  <tr>
+    <th>Cat Name</th>
+    <th>Pending Requests</th>
+    <th>Approved Requests</th>
+    <th>Denied Requests</th>
+  </tr>
+  
+  <% if @my_cats.count == 0 %>
+    <tr>
+      <td colspan='4'>No cats. <a href='<%= new_cat_url %>'>Add</a> one today!</td>
+    </tr>
+  <% else %>
+    <% @my_cats.each do |cat| %>
+      <tr>
+        <td><a href='<%= cat_url(cat.id) %>'><%= cat.name %></td>
+        <td>
+          <% requests = cat.pending_requests %>
+          <% if requests.count > 0 %>
+            <a href='<%= cat_url(cat.id) %>'>
+              <%= requests.count %>
+            </a>
+          <% else %>
+            0
+          <% end %>
+        </td>
+        <td>
+          <% requests = cat.accepted_requests %>
+          <% if requests.count > 0 %>
+            <a href='<%= cat_url(cat.id) %>'>
+              <%= requests.count %>
+            </a>
+          <% else %>
+            0
+          <% end %>
+        </td>
+        <td>
+          <% requests = cat.denied_requests %>
+          <% if requests.count > 0 %>
+            <a href='<%= cat_url(cat.id) %>'>
+              <%= requests.count %>
+            </a>
+          <% else %>
+            0
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<hr>
+
+<table border=1>
+  <tr>
+    <th colspan='4'>My Rental Requests</th>
+  </tr>
+  <tr>
+    <th>Start Date</th><th>End Date</th><th>Cat Name</th><th>Status</th>
+  </tr>
+  
+  <% if @my_requests.count == 0 %>
+    <tr><td colspan='4'>No requests made.</td></tr>
+  <% else %>
+    <% @my_requests.each do |request| %>
+      <tr>
+        <td><%= request.start_date %></td><td><%= request.end_date %></td><td><%= request.cat.name %></td><td><%= request.status %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  
+</table>
